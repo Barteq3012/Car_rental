@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.Core", "CarRental.Core\CarRental.Core.csproj", "{888FEED7-F5A5-4CCD-8EBF-62F38469167D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRental.Core", "CarRental.Core\CarRental.Core.csproj", "{888FEED7-F5A5-4CCD-8EBF-62F38469167D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.Infrastructure", "CarRental.Infrastructure\CarRental.Infrastructure.csproj", "{C8C9B733-AD4D-4723-BEE8-4DFC1B0CF0C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRental.Infrastructure", "CarRental.Infrastructure\CarRental.Infrastructure.csproj", "{C8C9B733-AD4D-4723-BEE8-4DFC1B0CF0C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.WebAPI", "CarRental.WebAPI\CarRental.WebAPI.csproj", "{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.WebAPI", "CarRental.WebAPI\CarRental.WebAPI.csproj", "{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{888FEED7-F5A5-4CCD-8EBF-62F38469167D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -46,17 +43,23 @@ Global
 		{C8C9B733-AD4D-4723-BEE8-4DFC1B0CF0C3}.Release|x64.Build.0 = Release|Any CPU
 		{C8C9B733-AD4D-4723-BEE8-4DFC1B0CF0C3}.Release|x86.ActiveCfg = Release|Any CPU
 		{C8C9B733-AD4D-4723-BEE8-4DFC1B0CF0C3}.Release|x86.Build.0 = Release|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Debug|x64.Build.0 = Debug|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Debug|x86.Build.0 = Debug|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Release|x64.ActiveCfg = Release|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Release|x64.Build.0 = Release|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Release|x86.ActiveCfg = Release|Any CPU
-		{8AB810D8-BFC0-497B-BCA3-C286E0D0D240}.Release|x86.Build.0 = Release|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Debug|x64.Build.0 = Debug|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Debug|x86.Build.0 = Debug|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Release|x64.ActiveCfg = Release|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Release|x64.Build.0 = Release|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Release|x86.ActiveCfg = Release|Any CPU
+		{8333AC35-5DA2-45AD-88B7-D9C846B6C1C1}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {70D56273-7AC5-4E03-A9BF-4B762D08ADBA}
 	EndGlobalSection
 EndGlobal
