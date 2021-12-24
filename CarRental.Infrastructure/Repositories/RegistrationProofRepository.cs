@@ -7,7 +7,7 @@ using CarRental.Core.Repository;
 
 namespace CarRental.Infrastructure.Repositories
 {
-    class RegistrationProofRepository : IRegistrationProofRepository
+    public class RegistrationProofRepository : IRegistrationProofRepository
     {
         public Task AddAsync(RegistrationProof r)
         {

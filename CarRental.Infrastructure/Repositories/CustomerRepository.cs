@@ -7,7 +7,7 @@ using CarRental.Core.Repository;
 
 namespace CarRental.Infrastructure.Repositories
 {
-    class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         public Task AddAsync(Customer c)
         {

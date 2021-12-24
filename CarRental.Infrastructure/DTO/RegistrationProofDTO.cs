@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarRental.Core.Domain
+namespace CarRental.Infrastructure.DTO
 {
-    public class RegistrationProof
+    public class RegistrationProofDTO
     {
         public int Id { get; set; }
         public DateTime FirstRegistrationDate { get; set; }
