@@ -11,7 +11,7 @@ namespace CarRental.Core.Repository
         Task<IEnumerable<Car>> BrowseAllAsync();
         Task<Car> GetAsync(int id);
         Task AddAsync(Car c);
-        Task DeleteAsync(Car c);
+        Task DeleteAsync(int id);
         Task UpdateAsync(Car c);
     }
 }

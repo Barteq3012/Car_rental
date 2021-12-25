@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarRental.Core.Domain;
@@ -9,27 +10,23 @@ namespace CarRental.Infrastructure.Repositories
 {
     public class CarRepository : ICarRepository
     {
-        public static List<Car> _carMock = new List<Car>();
-
-        public CarRepository()
-        {
-            _carMock.Add(new Car()
+        public static List<Car> _carMock = new List<Car>(){
+            new Car()
             {
                 Id = 1,
                 Brand = "Ferrari",
                 Model = "Enzo",
                 ProductionDate = DateTime.Parse("2000-12-30 21:37"),
                 Country = "Italy",
-                Mileage = 20000,             
+                Mileage = 20000,
                 RegistrationProof = new RegistrationProof()
                 {
                     Id = 10,
                     FirstRegistrationDate = DateTime.Parse("2011-03-21 13:26"),
                     Plate = "WBR3012"
                 }
-            });
-            
-            _carMock.Add(new Car()
+            },
+            new Car()
             {
                 Id = 2,
                 Brand = "Ferrari",
@@ -43,8 +40,8 @@ namespace CarRental.Infrastructure.Repositories
                     FirstRegistrationDate = DateTime.Parse("2011-03-21 13:26"),
                     Plate = "WBR3212"
                 }
-            });
-            _carMock.Add(new Car()
+            },
+            new Car()
             {
                 Id = 3,
                 Brand = "Ferrari",
@@ -58,8 +55,9 @@ namespace CarRental.Infrastructure.Repositories
                     FirstRegistrationDate = DateTime.Parse("2011-03-21 13:26"),
                     Plate = "WBR3112"
                 }
-            });
-        }
+            }
+        };
+
         public Task AddAsync(Car c)
         {
             throw new NotImplementedException();
@@ -70,14 +68,15 @@ namespace CarRental.Infrastructure.Repositories
             return await Task.FromResult(_carMock);
         }
 
-        public Task DeleteAsync(Car c)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            _carMock.Remove(_carMock.FirstOrDefault(x => x.Id == id));
+            await Task.CompletedTask;
         }
 
-        public Task<Car> GetAsync(int id)
+        public async Task<Car> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_carMock.FirstOrDefault(x => x.Id == id));
         }
 
         public Task UpdateAsync(Car c)

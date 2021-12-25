@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CarRental.Core.Domain;
 using CarRental.Core.Repository;
+using CarRental.Infrastructure.Commands;
 using CarRental.Infrastructure.DTO;
 
 namespace CarRental.Infrastructure.Services
@@ -32,12 +33,41 @@ namespace CarRental.Infrastructure.Services
             });
         }
 
-        private RegistrationProofDTO mapRegistrationProofToDTO(RegistrationProof r)
+        public async Task Delete(int id)
         {
-            if(r == null)
+            await _carRepository.DeleteAsync(id);
+        }
+
+        public async Task<CarDTO> Get(int id)
+        {
+            var c = await _carRepository.GetAsync(id);
+
+            if (c == null)
             {
                 return null;
-            } else
+            }
+
+            return mapCarToDTO(c);
+        }
+
+        
+        public Task Add(CreateCar car)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Update(UpdateCar car, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private RegistrationProofDTO mapRegistrationProofToDTO(RegistrationProof r)
+        {
+            if (r == null)
+            {
+                return null;
+            }
+            else
             {
                 var rDTO = new RegistrationProofDTO()
                 {
@@ -51,10 +81,11 @@ namespace CarRental.Infrastructure.Services
 
         private CarDTO mapCarToDTO(Car c)
         {
-            if(c == null)
+            if (c == null)
             {
                 return null;
-            } else
+            }
+            else
             {
                 var cDTO = new CarDTO()
                 {
@@ -69,5 +100,6 @@ namespace CarRental.Infrastructure.Services
                 return cDTO;
             }
         }
+
     }
 }
