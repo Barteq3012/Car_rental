@@ -58,9 +58,10 @@ namespace CarRental.Infrastructure.Repositories
             }
         };
 
-        public Task AddAsync(Car c)
+        public async Task AddAsync(Car c)
         {
-            throw new NotImplementedException();
+            _carMock.Add(c);
+            await Task.CompletedTask;
         }
 
         public async Task<IEnumerable<Car>> BrowseAllAsync()
@@ -79,9 +80,18 @@ namespace CarRental.Infrastructure.Repositories
             return await Task.FromResult(_carMock.FirstOrDefault(x => x.Id == id));
         }
 
-        public Task UpdateAsync(Car c)
+        public async Task UpdateAsync(Car c)
         {
-            throw new NotImplementedException();
+            var car = _carMock.FirstOrDefault(x => x.Id == c.Id);
+
+            car.Brand = c.Brand;
+            car.Model = c.Model;
+            car.ProductionDate = c.ProductionDate;
+            car.Country = c.Country;
+            car.Mileage = c.Mileage;
+            car.RegistrationProof = c.RegistrationProof;
+
+            await Task.CompletedTask;
         }
     }
 }

@@ -7,6 +7,7 @@ using CarRental.Core.Domain;
 using CarRental.Core.Repository;
 using CarRental.Infrastructure.Commands;
 using CarRental.Infrastructure.DTO;
+using static CarRental.Infrastructure.Commands.CreateCar;
 
 namespace CarRental.Infrastructure.Services
 {
@@ -29,7 +30,7 @@ namespace CarRental.Infrastructure.Services
                 ProductionDate = x.ProductionDate,
                 Country = x.Country,
                 Mileage = x.Mileage,
-                RegistrationProofDTO = mapRegistrationProofToDTO(x.RegistrationProof)
+                RegistrationProof = mapRegistrationProofToDTO(x.RegistrationProof)
             });
         }
 
@@ -50,15 +51,66 @@ namespace CarRental.Infrastructure.Services
             return mapCarToDTO(c);
         }
 
-        
-        public Task Add(CreateCar car)
+
+        public async Task Add(CreateCar c)
         {
-            throw new NotImplementedException();
+            Car car = null;
+            try
+            {
+                car = new Car()
+                {
+                    Id = c.Id,
+                    Brand = c.Brand,
+                    Model = c.Model,
+                    ProductionDate = c.ProductionDate,
+                    Country = c.Country,
+                    Mileage = c.Mileage,
+                    RegistrationProof = new RegistrationProof()
+                    {
+                        Id = c.RegistrationProof.Id,
+                        FirstRegistrationDate = c.RegistrationProof.FirstRegistrationDate,
+                        Plate = c.RegistrationProof.Plate
+                    }
+                };
+            }
+            catch (System.NullReferenceException e)
+            {
+                Console.WriteLine(e.ToString());
+                await Task.FromException(e);
+            }
+
+            await _carRepository.AddAsync(car);
         }
 
-        public Task Update(UpdateCar car, int id)
+        public async Task Update(UpdateCar c, int id)
         {
-            throw new NotImplementedException();
+            Car car = null;
+            try
+            {
+                car = new Car()
+                {
+                    Id = id,
+                    Brand = c.Brand,
+                    Model = c.Model,
+                    ProductionDate = c.ProductionDate,
+                    Country = c.Country,
+                    Mileage = c.Mileage,
+                    RegistrationProof = new RegistrationProof()
+                    {
+                        Id = c.RegistrationProof.Id,
+                        FirstRegistrationDate = c.RegistrationProof.FirstRegistrationDate,
+                        Plate = c.RegistrationProof.Plate
+                    }
+
+                };
+            }
+            catch (System.NullReferenceException e)
+            {
+                Console.WriteLine(e.ToString());
+                await Task.FromException(e);
+            }
+
+            await _carRepository.UpdateAsync(car);
         }
 
         private RegistrationProofDTO mapRegistrationProofToDTO(RegistrationProof r)
@@ -95,7 +147,7 @@ namespace CarRental.Infrastructure.Services
                     ProductionDate = c.ProductionDate,
                     Country = c.Country,
                     Mileage = c.Mileage,
-                    RegistrationProofDTO = mapRegistrationProofToDTO(c.RegistrationProof)
+                    RegistrationProof = mapRegistrationProofToDTO(c.RegistrationProof)
                 };
                 return cDTO;
             }

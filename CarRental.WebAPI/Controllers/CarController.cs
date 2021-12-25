@@ -29,35 +29,46 @@ namespace CarRental.WebAPI.Controllers
         public async Task<IActionResult> GetCar(int id)
         {
             CarDTO z = await _carService.Get(id);
-            if(z == null)
+            if (z == null)
             {
                 return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie ma zawodnika o tym id!</h1>", "text/html");
             }
             return Json(z);
         }
 
-        /*
+
         [HttpPost]
-        public async Task<IActionResult> AddCar([FromBody] CreateCar)
+        public async Task<IActionResult> AddCar([FromBody] CreateCar c)
         {
-            throw new NotImplementedException();
+            await _carService.Add(c);
+            IEnumerable<CarDTO> z = await _carService.BrowseAll();
+            if (z == null)
+            {
+                return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie udało się dodać zawodnika</h1>", "text/html");
+            }
+            return Json(z);
 
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCar([FromBody] UpdateCar, int id)
+        public async Task<IActionResult> UpdateCar([FromBody] UpdateCar c, int id)
         {
-            throw new NotImplementedException();
-
+            await _carService.Update(c, id);
+            IEnumerable<CarDTO> z = await _carService.BrowseAll();
+            if (z == null)
+            {
+                return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie udało się zaktualizować zawodnika</h1>", "text/html");
+            }
+            return Json(z);
         }
-        */
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCar(int id)
         {
             await _carService.Delete(id);
             IEnumerable<CarDTO> z = await _carService.BrowseAll();
-            if(z == null)
+            if (z == null)
             {
                 return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie udało się usunąć zawodnika</h1>", "text/html");
             }

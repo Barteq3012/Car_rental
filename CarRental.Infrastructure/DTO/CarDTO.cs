@@ -12,6 +12,6 @@ namespace CarRental.Infrastructure.DTO
         public DateTime ProductionDate { get; set; }
         public string Country { get; set; }
         public int Mileage { get; set; }
-        public RegistrationProofDTO RegistrationProofDTO  { get; set; }
+        public RegistrationProofDTO RegistrationProof  { get; set; }
     }
 }
