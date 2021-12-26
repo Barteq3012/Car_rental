@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using CarRental.Core.Domain;
 using CarRental.Core.Repository;
@@ -19,7 +20,7 @@ namespace CarRental.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(Company c)
+        public Task DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }

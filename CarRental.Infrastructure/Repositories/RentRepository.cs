@@ -19,7 +19,7 @@ namespace CarRental.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(Rent r)
+        public Task DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }

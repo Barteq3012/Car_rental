@@ -11,7 +11,7 @@ namespace CarRental.Core.Repository
         Task<IEnumerable<RegistrationProof>> BrowseAllAsync();
         Task<RegistrationProof> GetAsync(int id);
         Task AddAsync(RegistrationProof r);
-        Task DeleteAsync(RegistrationProof r);
+        Task DeleteAsync(int id);
         Task UpdateAsync(RegistrationProof r);
     }
 }

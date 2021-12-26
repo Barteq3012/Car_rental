@@ -8,14 +8,14 @@ using CarRental.Infrastructure.DTO;
 
 namespace CarRental.Infrastructure.Services
 {
-    public class CustomerService : ICustomerService
+    public class CompanyService : ICompanyService
     {
-        public Task Add(CreateCustomer customer)
+        public Task Add(CreateCompany company)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<CustomerDTO>> BrowseAll()
+        public Task<IEnumerable<CompanyDTO>> BrowseAll()
         {
             throw new NotImplementedException();
         }
@@ -25,12 +25,12 @@ namespace CarRental.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<CustomerDTO> Get(int id)
+        public Task<CompanyDTO> Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task Update(UpdateCustomer customer, int id)
+        public Task Update(UpdateCompany company, int id)
         {
             throw new NotImplementedException();
         }

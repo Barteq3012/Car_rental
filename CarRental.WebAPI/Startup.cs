@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,8 +30,25 @@ namespace CarRental.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ICarService, CarService>();
+
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<ICompanyService, CompanyService>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
+
+            services.AddScoped<IRegistrationProofRepository, RegistrationProofRepository>();
+            services.AddScoped<IRegistrationProofService, RegistrationProofService>();
+
+            services.AddScoped<IRentRepository, RentRepository>();
+            services.AddScoped<IRentService, RentService>();
+
+            services.AddDbContext<AppDbContext>(
+                options => options.UseSqlServer(
+                    Configuration.GetConnectionString("CarRentalConnectionString")));
 
         }
 
