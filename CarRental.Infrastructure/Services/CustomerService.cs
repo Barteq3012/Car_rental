@@ -13,9 +13,11 @@ namespace CarRental.Infrastructure.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
-        public CustomerService(ICustomerRepository customerRepository)
+        private readonly ICompanyRepository _companyRepository;
+        public CustomerService(ICustomerRepository customerRepository, ICompanyRepository companyRepository)
         {
             _customerRepository = customerRepository;
+            _companyRepository = companyRepository;
         }
         public async Task Add(CreateCustomer c)
         {
@@ -29,13 +31,7 @@ namespace CarRental.Infrastructure.Services
                     SecondName = c.SecondName,
                     BirthDate = c.BirthDate,
                     Country = c.Country,
-                    Company = new Company()
-                    {
-                        Id = c.Company.Id,
-                        Name = c.Company.Name,
-                        Address = c.Company.Address,
-                        Country = c.Company.Country
-                    }
+                    Company = await _companyRepository.GetAsync(c.CompanyId)
                 };
             }
             catch (System.NullReferenceException e)
@@ -91,13 +87,7 @@ namespace CarRental.Infrastructure.Services
                     SecondName = c.SecondName,
                     BirthDate = c.BirthDate,
                     Country = c.Country,
-                    Company = new Company()
-                    {
-                        Id = c.Company.Id,
-                        Name = c.Company.Name,
-                        Address = c.Company.Address,
-                        Country = c.Company.Country
-                    }
+                    Company = await _companyRepository.GetAsync(c.CompanyId)
                 };
             }
             catch (System.NullReferenceException e)

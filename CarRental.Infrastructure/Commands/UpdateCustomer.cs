@@ -11,6 +11,6 @@ namespace CarRental.Infrastructure.Commands
         public string SecondName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Country { get; set; }
-        public Company Company { get; set; }
+        public int CompanyId { get; set; }
     }
 }

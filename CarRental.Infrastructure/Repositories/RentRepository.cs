@@ -33,7 +33,11 @@ namespace CarRental.Infrastructure.Repositories
 
         public async Task<IEnumerable<Rent>> BrowseAllAsync()
         {
-            return await Task.FromResult(_appDbContext.Rent.Include(x => x.Customer).Include(x => x.Car)); //podwojny include
+            return await Task.FromResult(_appDbContext.Rent
+                .Include(x => x.Customer)
+                .Include(x => x.Car)
+                .Include(x => x.Car.RegistrationProof)
+                .Include(x => x.Customer.Company));
         }
 
         public async Task DeleteAsync(int id)
@@ -52,14 +56,24 @@ namespace CarRental.Infrastructure.Repositories
 
         public async Task<Rent> GetAsync(int id)
         {
-            return await Task.FromResult(_appDbContext.Rent.Include(x => x.Customer).Include(x => x.Car).FirstOrDefault(x => x.Id == id));
+            return await Task.FromResult(_appDbContext.Rent
+                .Include(x => x.Customer)
+                .Include(x => x.Car)
+                .Include(x => x.Car.RegistrationProof)
+                .Include(x => x.Customer.Company)
+                .FirstOrDefault(x => x.Id == id));
         }
 
         public async Task UpdateAsync(Rent r)
         {
             try
             {
-                var rent = _appDbContext.Rent.Include(x => x.Customer).Include(x => x.Car).FirstOrDefault(x => x.Id == r.Id);
+                var rent = _appDbContext.Rent
+                    .Include(x => x.Customer)
+                    .Include(x => x.Car)
+                    .Include(x => x.Car.RegistrationProof)
+                    .Include(x => x.Customer.Company)
+                    .FirstOrDefault(x => x.Id == r.Id);
 
                 rent.Customer = r.Customer;
                 rent.Car = r.Car;
