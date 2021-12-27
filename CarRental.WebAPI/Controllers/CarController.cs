@@ -31,7 +31,7 @@ namespace CarRental.WebAPI.Controllers
             CarDTO z = await _carService.Get(id);
             if (z == null)
             {
-                return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie ma zawodnika o tym id!</h1>", "text/html");
+                return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie ma auta o tym id!</h1>", "text/html");
             }
             return Json(z);
         }
@@ -44,7 +44,7 @@ namespace CarRental.WebAPI.Controllers
             IEnumerable<CarDTO> z = await _carService.BrowseAll();
             if (z == null)
             {
-                return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie udało się dodać zawodnika</h1>", "text/html");
+                return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie udało się dodać auta</h1>", "text/html");
             }
             return Json(z);
 
@@ -57,7 +57,7 @@ namespace CarRental.WebAPI.Controllers
             IEnumerable<CarDTO> z = await _carService.BrowseAll();
             if (z == null)
             {
-                return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie udało się zaktualizować zawodnika</h1>", "text/html");
+                return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie udało się zaktualizować auta</h1>", "text/html");
             }
             return Json(z);
         }
@@ -70,7 +70,7 @@ namespace CarRental.WebAPI.Controllers
             IEnumerable<CarDTO> z = await _carService.BrowseAll();
             if (z == null)
             {
-                return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie udało się usunąć zawodnika</h1>", "text/html");
+                return base.Content("<h1 style='color:red;text-align: center;font-size: 72px'>Nie udało się usunąć auta</h1>", "text/html");
             }
             return Json(z);
 

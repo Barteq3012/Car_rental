@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarRental.Core.Domain;
 using CarRental.Core.Repository;
 using CarRental.Infrastructure.Commands;
 using CarRental.Infrastructure.DTO;
@@ -10,29 +12,102 @@ namespace CarRental.Infrastructure.Services
 {
     public class CompanyService : ICompanyService
     {
-        public Task Add(CreateCompany company)
+        private readonly ICompanyRepository _companyRepository;
+        public CompanyService(ICompanyRepository companyRepository)
         {
-            throw new NotImplementedException();
+            _companyRepository = companyRepository;
+        }
+        public async Task Add(CreateCompany c)
+        {
+            Company company = null;
+            try
+            {
+                company = new Company()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Address = c.Address,
+                    Country = c.Country
+                };
+            }
+            catch (System.NullReferenceException e)
+            {
+                Console.WriteLine(e.ToString());
+                await Task.FromException(e);
+            }
+
+            await _companyRepository.AddAsync(company);
         }
 
-        public Task<IEnumerable<CompanyDTO>> BrowseAll()
+        public async Task<IEnumerable<CompanyDTO>> BrowseAll()
         {
-            throw new NotImplementedException();
+            var c = await _companyRepository.BrowseAllAsync();
+
+            return c.Select(x => new CompanyDTO()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Address = x.Address,
+                Country = x.Country,
+            });
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _companyRepository.DeleteAsync(id);
         }
 
-        public Task<CompanyDTO> Get(int id)
+        public async Task<CompanyDTO> Get(int id)
         {
-            throw new NotImplementedException();
+            var c = await _companyRepository.GetAsync(id);
+
+            if (c == null)
+            {
+                return null;
+            }
+
+            return mapCompanyToDTO(c);
         }
 
-        public Task Update(UpdateCompany company, int id)
+        public async Task Update(UpdateCompany c, int id)
         {
-            throw new NotImplementedException();
+            Company company = null;
+            try
+            {
+                company = new Company()
+                {
+                    Id = id,
+                    Name = c.Name,
+                    Address = c.Address,
+                    Country = c.Country
+                };
+            }
+            catch (System.NullReferenceException e)
+            {
+                Console.WriteLine(e.ToString());
+                await Task.FromException(e);
+            }
+
+            await _companyRepository.UpdateAsync(company);
+        }
+
+        private CompanyDTO mapCompanyToDTO(Company c)
+        {
+            if (c == null)
+            {
+                return null;
+            }
+            else
+            {
+                var cDTO = new CompanyDTO()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Address = c.Address,
+                    Country = c.Country
+                };
+                return cDTO;
+            }
         }
     }
 }

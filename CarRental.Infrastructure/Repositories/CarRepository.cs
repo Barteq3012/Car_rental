@@ -40,7 +40,9 @@ namespace CarRental.Infrastructure.Repositories
         {
             try
             {
-                _appDbContext.Remove(_appDbContext.Car.Include(x => x.RegistrationProof).FirstOrDefault(x => x.Id == id));
+                var c = _appDbContext.Car.Include(x => x.RegistrationProof).FirstOrDefault(x => x.Id == id);
+                _appDbContext.Remove(c);
+                _appDbContext.Remove(_appDbContext.RegistrationProof.FirstOrDefault(x => x.Id == c.RegistrationProof.Id));
                 _appDbContext.SaveChanges();
                 await Task.CompletedTask;
             }

@@ -11,7 +11,7 @@ namespace CarRental.Infrastructure.DTO
         public string SecondName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Country { get; set; }
-        public CompanyDTO CompanyDTO  { get; set; }
+        public CompanyDTO Company  { get; set; }
 
     }
 }
