@@ -1,37 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarRental.Core.Domain;
 using CarRental.Core.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarRental.Infrastructure.Repositories
 {
     public class RentRepository : IRentRepository
     {
-        public Task AddAsync(Rent r)
+        private AppDbContext _appDbContext;
+
+        public RentRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            _appDbContext = appDbContext;
+        }
+        public async Task AddAsync(Rent r)
+        {
+            try
+            {
+                _appDbContext.Rent.Add(r);
+                _appDbContext.SaveChanges();
+                await Task.CompletedTask;
+            }
+            catch (Exception e)
+            {
+                await Task.FromException(e);
+            }
         }
 
-        public Task<IEnumerable<Rent>> BrowseAllAsync()
+        public async Task<IEnumerable<Rent>> BrowseAllAsync()
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_appDbContext.Rent.Include(x => x.Customer).Include(x => x.Car)); //podwojny include
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _appDbContext.Remove(_appDbContext.Rent.Include(x => x.Customer).Include(x => x.Car).FirstOrDefault(x => x.Id == id));
+                _appDbContext.SaveChanges();
+                await Task.CompletedTask;
+            }
+            catch (Exception e)
+            {
+                await Task.FromException(e);
+            }
         }
 
-        public Task<Rent> GetAsync(int id)
+        public async Task<Rent> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_appDbContext.Rent.Include(x => x.Customer).Include(x => x.Car).FirstOrDefault(x => x.Id == id));
         }
 
-        public Task UpdateAsync(Rent r)
+        public async Task UpdateAsync(Rent r)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var rent = _appDbContext.Rent.Include(x => x.Customer).Include(x => x.Car).FirstOrDefault(x => x.Id == r.Id);
+
+                rent.Customer = r.Customer;
+                rent.Car = r.Car;
+                rent.RentDate = r.RentDate;
+                rent.ReturnDate = r.ReturnDate;
+                rent.TotalCost = r.TotalCost;
+
+                _appDbContext.SaveChanges();
+                await Task.CompletedTask;
+            }
+            catch (Exception e)
+            {
+                await Task.FromException(e);
+            }
         }
     }
 }

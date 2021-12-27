@@ -10,29 +10,67 @@ namespace CarRental.Infrastructure.Repositories
 {
     public class CompanyRepository : ICompanyRepository
     {
-        public Task AddAsync(Company c)
+        private AppDbContext _appDbContext;
+        public CompanyRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            _appDbContext = appDbContext;         
+        }
+        public async Task AddAsync(Company c)
+        {
+            try
+            {
+                _appDbContext.Company.Add(c);
+                _appDbContext.SaveChanges();
+                await Task.CompletedTask;
+            }
+            catch (Exception e)
+            {
+                await Task.FromException(e);
+            }
         }
 
-        public Task<IEnumerable<Company>> BrowseAllAsync()
+        public async Task<IEnumerable<Company>> BrowseAllAsync()
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_appDbContext.Company);
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _appDbContext.Remove(_appDbContext.Company.FirstOrDefault(x => x.Id == id));
+                _appDbContext.SaveChanges();
+                await Task.CompletedTask;
+            }
+            catch (Exception e)
+            {
+                await Task.FromException(e);
+            }
         }
 
-        public Task<Company> GetAsync(int id)
+        public async Task<Company> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_appDbContext.Company.FirstOrDefault(x => x.Id == id));
+
         }
 
-        public Task UpdateAsync(Company c)
+        public async Task UpdateAsync(Company c)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var cmp = _appDbContext.Company.FirstOrDefault(x => x.Id == c.Id);
+
+                cmp.Name = c.Name;
+                cmp.Address = c.Address;
+                cmp.Country = c.Country;
+
+                _appDbContext.SaveChanges();
+                await Task.CompletedTask;
+            }
+            catch(Exception e)
+            {
+                await Task.FromException(e);
+            }
         }
     }
 }

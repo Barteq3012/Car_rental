@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarRental.Core.Domain;
@@ -9,29 +10,66 @@ namespace CarRental.Infrastructure.Repositories
 {
     public class RegistrationProofRepository : IRegistrationProofRepository
     {
-        public Task AddAsync(RegistrationProof r)
+        private AppDbContext _appDbContext;
+        public RegistrationProofRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            _appDbContext = appDbContext;
+        }
+        public async Task AddAsync(RegistrationProof r)
+        {
+            try
+            {
+                _appDbContext.RegistrationProof.Add(r);
+                _appDbContext.SaveChanges();
+                await Task.CompletedTask;
+            }
+            catch (Exception e)
+            {
+                await Task.FromException(e);
+            }
         }
 
-        public Task<IEnumerable<RegistrationProof>> BrowseAllAsync()
+        public async Task<IEnumerable<RegistrationProof>> BrowseAllAsync()
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_appDbContext.RegistrationProof);
+
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _appDbContext.Remove(_appDbContext.RegistrationProof.FirstOrDefault(x => x.Id == id));
+                _appDbContext.SaveChanges();
+                await Task.CompletedTask;
+            }
+            catch (Exception e)
+            {
+                await Task.FromException(e);
+            }
         }
 
-        public Task<RegistrationProof> GetAsync(int id)
+        public async Task<RegistrationProof> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_appDbContext.RegistrationProof.FirstOrDefault(x => x.Id == id));
         }
 
-        public Task UpdateAsync(RegistrationProof r)
+        public async Task UpdateAsync(RegistrationProof r)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var rp = _appDbContext.RegistrationProof.FirstOrDefault(x => x.Id == r.Id);
+
+                rp.FirstRegistrationDate = r.FirstRegistrationDate;
+                rp.Plate = r.Plate;
+
+                _appDbContext.SaveChanges();
+                await Task.CompletedTask;
+            }
+            catch(Exception e)
+            {
+                await Task.FromException(e);
+            }
         }
     }
 }
