@@ -66,7 +66,7 @@ namespace CarRental.Infrastructure.Services
                 return null;
             }
 
-            return mapCompanyToDTO(c);
+            return MapDomain.mapCompanyToDTO(c);
         }
 
         public async Task Update(UpdateCompany c, int id)
@@ -89,25 +89,6 @@ namespace CarRental.Infrastructure.Services
             }
 
             await _companyRepository.UpdateAsync(company);
-        }
-
-        private CompanyDTO mapCompanyToDTO(Company c)
-        {
-            if (c == null)
-            {
-                return null;
-            }
-            else
-            {
-                var cDTO = new CompanyDTO()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Address = c.Address,
-                    Country = c.Country
-                };
-                return cDTO;
-            }
         }
     }
 }

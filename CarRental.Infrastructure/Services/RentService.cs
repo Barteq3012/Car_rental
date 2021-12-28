@@ -52,8 +52,8 @@ namespace CarRental.Infrastructure.Services
             return r.Select(x => new RentDTO()
             {
                 Id = x.Id,
-                Car = mapCarToDTO(x.Car),
-                Customer = mapCustomerToDTO(x.Customer),
+                Car = MapDomain.mapCarToDTO(x.Car),
+                Customer = MapDomain.mapCustomerToDTO(x.Customer),
                 RentDate = x.RentDate,
                 ReturnDate = (DateTime)x.ReturnDate,
                 TotalCost = x.TotalCost
@@ -74,7 +74,7 @@ namespace CarRental.Infrastructure.Services
                 return null;
             }
 
-            return mapRentToDTO(r);
+            return MapDomain.mapRentToDTO(r);
         }
 
         public async Task Update(UpdateRent r, int id)
@@ -100,107 +100,5 @@ namespace CarRental.Infrastructure.Services
 
             await _rentRepository.UpdateAsync(rent);
         }
-
-        private RentDTO mapRentToDTO(Rent r)
-        {
-            if (r == null)
-            {
-                return null;
-            }
-            else
-            {
-                var rDTO = new RentDTO()
-                {
-                    Id = r.Id,
-                    Car = mapCarToDTO(r.Car),
-                    Customer = mapCustomerToDTO(r.Customer),
-                    RentDate = r.RentDate,
-                    ReturnDate = (DateTime)r.ReturnDate,
-                    TotalCost = r.TotalCost
-                };
-                return rDTO;
-            }
-        }
-
-        private CustomerDTO mapCustomerToDTO(Customer c)
-        {
-            if (c == null)
-            {
-                return null;
-            }
-            else
-            {
-                var cDTO = new CustomerDTO()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    SecondName = c.SecondName,
-                    BirthDate = c.BirthDate,
-                    Country = c.Country,
-                    Company = mapCompanyToDTO(c.Company)
-                };
-                return cDTO;
-            }
-        }
-
-        private CompanyDTO mapCompanyToDTO(Company c)
-        {
-            if (c == null)
-            {
-                return null;
-            }
-            else
-            {
-                var cDTO = new CompanyDTO()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Address = c.Address,
-                    Country = c.Country
-                };
-                return cDTO;
-            }
-        }
-
-        private RegistrationProofDTO mapRegistrationProofToDTO(RegistrationProof r)
-        {
-            if (r == null)
-            {
-                return null;
-            }
-            else
-            {
-                var rDTO = new RegistrationProofDTO()
-                {
-                    Id = r.Id,
-                    FirstRegistrationDate = r.FirstRegistrationDate,
-                    Plate = r.Plate
-                };
-                return rDTO;
-            }
-        }
-
-        private CarDTO mapCarToDTO(Car c)
-        {
-            if (c == null)
-            {
-                return null;
-            }
-            else
-            {
-                var cDTO = new CarDTO()
-                {
-                    Id = c.Id,
-                    Brand = c.Brand,
-                    Model = c.Model,
-                    ProductionDate = c.ProductionDate,
-                    Country = c.Country,
-                    Mileage = c.Mileage,
-                    RegistrationProof = mapRegistrationProofToDTO(c.RegistrationProof)
-                };
-                return cDTO;
-            }
-        }
-
     }
 }

@@ -54,7 +54,7 @@ namespace CarRental.Infrastructure.Services
                 SecondName = x.SecondName,
                 BirthDate = x.BirthDate,
                 Country = x.Country,
-                Company = mapCompanyToDTO(x.Company)
+                Company = MapDomain.mapCompanyToDTO(x.Company)
             });
         }
 
@@ -72,7 +72,7 @@ namespace CarRental.Infrastructure.Services
                 return null;
             }
 
-            return mapCustomerToDTO(c);
+            return MapDomain.mapCustomerToDTO(c);
         }
 
         public async Task Update(UpdateCustomer c, int id)
@@ -98,46 +98,5 @@ namespace CarRental.Infrastructure.Services
 
             await _customerRepository.UpdateAsync(customer);
         }
-
-        private CustomerDTO mapCustomerToDTO(Customer c)
-        {
-            if (c == null)
-            {
-                return null;
-            }
-            else
-            {
-                var cDTO = new CustomerDTO()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    SecondName = c.SecondName,
-                    BirthDate = c.BirthDate,
-                    Country = c.Country,
-                    Company = mapCompanyToDTO(c.Company)
-                };
-                return cDTO;
-            }
-        }
-
-        private CompanyDTO mapCompanyToDTO(Company c)
-        {
-            if (c == null)
-            {
-                return null;
-            }
-            else
-            {
-                var cDTO = new CompanyDTO()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Address = c.Address,
-                    Country = c.Country
-                };
-                return cDTO;
-            }
-        }
-
     }
 }

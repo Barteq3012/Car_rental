@@ -65,7 +65,7 @@ namespace CarRental.Infrastructure.Services
                 return null;
             }
 
-            return mapRegistrationProofToDTO(r);
+            return MapDomain.mapRegistrationProofToDTO(r);
         }
 
         public async Task Update(UpdateRegistrationProof r, int id)
@@ -87,24 +87,6 @@ namespace CarRental.Infrastructure.Services
             }
 
             await _registrationProofRepository.UpdateAsync(registrationProof);
-        }
-
-        private RegistrationProofDTO mapRegistrationProofToDTO(RegistrationProof r)
-        {
-            if (r == null)
-            {
-                return null;
-            }
-            else
-            {
-                var rDTO = new RegistrationProofDTO()
-                {
-                    Id = r.Id,
-                    FirstRegistrationDate = r.FirstRegistrationDate,
-                    Plate = r.Plate,
-                };
-                return rDTO;
-            }
         }
     }
 }

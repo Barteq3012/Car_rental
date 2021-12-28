@@ -30,7 +30,7 @@ namespace CarRental.Infrastructure.Services
                 ProductionDate = x.ProductionDate,
                 Country = x.Country,
                 Mileage = x.Mileage,
-                RegistrationProof = mapRegistrationProofToDTO(x.RegistrationProof)
+                RegistrationProof = MapDomain.mapRegistrationProofToDTO(x.RegistrationProof)
             });
         }
 
@@ -48,7 +48,7 @@ namespace CarRental.Infrastructure.Services
                 return null;
             }
 
-            return mapCarToDTO(c);
+            return MapDomain.mapCarToDTO(c);
         }
 
 
@@ -101,7 +101,6 @@ namespace CarRental.Infrastructure.Services
                         FirstRegistrationDate = c.RegistrationProof.FirstRegistrationDate,
                         Plate = c.RegistrationProof.Plate
                     }
-
                 };
             }
             catch (System.NullReferenceException e)
@@ -112,46 +111,5 @@ namespace CarRental.Infrastructure.Services
 
             await _carRepository.UpdateAsync(car);
         }
-
-        private RegistrationProofDTO mapRegistrationProofToDTO(RegistrationProof r)
-        {
-            if (r == null)
-            {
-                return null;
-            }
-            else
-            {
-                var rDTO = new RegistrationProofDTO()
-                {
-                    Id = r.Id,
-                    FirstRegistrationDate = r.FirstRegistrationDate,
-                    Plate = r.Plate
-                };
-                return rDTO;
-            }
-        }
-
-        private CarDTO mapCarToDTO(Car c)
-        {
-            if (c == null)
-            {
-                return null;
-            }
-            else
-            {
-                var cDTO = new CarDTO()
-                {
-                    Id = c.Id,
-                    Brand = c.Brand,
-                    Model = c.Model,
-                    ProductionDate = c.ProductionDate,
-                    Country = c.Country,
-                    Mileage = c.Mileage,
-                    RegistrationProof = mapRegistrationProofToDTO(c.RegistrationProof)
-                };
-                return cDTO;
-            }
-        }
-
     }
 }
