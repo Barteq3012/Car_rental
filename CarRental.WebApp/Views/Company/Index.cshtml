@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CarRental.WebApp.Models.CompanyVM>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span class ="btntext">Add New Company</span></a>
 </p>
 <table class="table">
     <thead>
@@ -37,11 +37,8 @@
                 @Html.DisplayFor(modelItem => item.Country)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                <a href=@Url.Action("Edit", new { id=item.Id }) data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="/Delete" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                <a class="edit" href="@Url.Action("Edit", new { id=item.Id })"><i class="material-icons" title="Edit">&#xE254;</i></a>
+                <a class="delete" href="@Url.Action("Delete", new { id=item.Id })"><i class="material-icons" title="Edit">&#xE872;</i></a>
             </td>
         </tr>
 }
