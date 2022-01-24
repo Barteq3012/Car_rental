@@ -23,6 +23,7 @@ namespace CarRental.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllersWithViews();
         }
 
@@ -45,6 +46,11 @@ namespace CarRental.WebApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            var supportedCultures = new [] { "en", "fr", "es"};
+            var locOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(locOptions);
 
             app.UseEndpoints(endpoints =>
             {

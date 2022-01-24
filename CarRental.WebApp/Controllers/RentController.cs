@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CarRental.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -49,7 +51,7 @@ namespace CarRental.WebApp.Controllers
 
         public IActionResult Create()
         {
-             return View();
+            return View();
         }
 
         [HttpPost]

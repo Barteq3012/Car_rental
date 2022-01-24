@@ -68,6 +68,6 @@
 
 </div>
 <div>
-    <a class="edit" href="@Url.Action("Edit", new { id=Model.Id })"><i class="material-icons" title="Edit">&#xE254;</i></a> |
-    <a asp-action="Index">Back to List</a>
+    <a href="@Url.Action("Edit", new { id=Model.Id })" class="btn btn-primary"><i class="material-icons">&#xE254;</i> <span class="btntext">Edit Customer</span></a>
+    <a asp-action="Index" class="btn btn-secondary"><i class="material-icons">&#xE5C4;</i> <span class="btntext">Back to List</span></a>
 </div>
