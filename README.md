@@ -21,9 +21,11 @@ Car rental is a student project which is creating in order to learn basics of ar
 1. Use command *dotnet run* in WebAPI folder to run API
 
 ![plot](./scr/1.png)
+
 2. Check if database is connected
 
 ![plot](./scr/2.png)
+
 3. Run CarRental.WebApp
 
 ![plot](./scr/3.png)
